@@ -1,4 +1,4 @@
-package enadev.spring.sfgpetclinic;
+package sfgpetclinic;
 
 //import org.junit.jupiter.api.Test;
 import org.junit.Test;
