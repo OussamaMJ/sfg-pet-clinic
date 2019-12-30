@@ -1,13 +1,13 @@
 package enadev.spring.sfgpetclinic.model;
 
 public class PetType {
-    private String name;
+    private String petName;
 
-    public String getName() {
-        return name;
+    public String getPetName() {
+        return petName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPetName(String name) {
+        this.petName = name;
     }
 }
