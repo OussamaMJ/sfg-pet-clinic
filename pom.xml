@@ -38,6 +38,7 @@
 				<version>2.5.3</version>
 				<configuration>
 					<goal>install</goal>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -49,5 +50,13 @@
 		<connection>scm:git:https://github.com/OussamaMJ/sfg-pet-clinic.git.git</connection>-->
 	  <tag>HEAD</tag>
   </scm>
+
+	<distributionManagement>
+		<repository>
+			<id>internal.repo</id>
+			<name>Internal repo</name>
+			<url>file:///E:/Spring/sfg-pet-clinic-deploy</url>
+		</repository>
+	</distributionManagement>
 
 </project>
