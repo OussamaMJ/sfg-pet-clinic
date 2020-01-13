@@ -2,11 +2,6 @@ package enadev.spring.sfgpetclinic.service;
 
 import enadev.spring.sfgpetclinic.model.Owner;
 
-import java.util.Set;
-
-public interface OwnerService {
+public interface OwnerService extends CrudInterface<Owner,Long>{
     Owner findByLastName(String lastName);
-    Owner findById(Long id);
-    Owner save(Owner owner);
-    Set<Owner> findAll();
 }

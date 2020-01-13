@@ -1,5 +1,6 @@
 package enadev.spring.sfgpetclinic.model;
 
+
 import java.time.LocalDate;
 
 public class Pet extends BaseEntity{
