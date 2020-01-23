@@ -1,11 +1,11 @@
 package enadev.spring.sfgpetclinic.service.map;
 
 import enadev.spring.sfgpetclinic.model.Pet;
-import enadev.spring.sfgpetclinic.service.CrudInterface;
+import enadev.spring.sfgpetclinic.service.PetService;
 
 import java.util.Set;
 
-public class PetServiceMap extends AbstractMapService<Pet, Long> implements CrudInterface<Pet,Long> {
+public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService {
     @Override
     public Set<Pet> findAll() {
         return super.findAll();
