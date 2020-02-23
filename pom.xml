@@ -33,6 +33,13 @@
 	<name>sfg-pet-clinic</name>
 	<description>SFG PET CLINIC</description>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+	</dependencies>
+
 
 	<build>
 		<plugins>
