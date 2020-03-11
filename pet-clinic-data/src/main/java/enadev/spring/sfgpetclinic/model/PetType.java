@@ -16,4 +16,9 @@ import javax.persistence.Table;
 public class PetType extends BaseEntity{
     @Column(name = "pet_name")
     private String petName;
+
+    @Override
+    public String toString() {
+        return petName;
+    }
 }
