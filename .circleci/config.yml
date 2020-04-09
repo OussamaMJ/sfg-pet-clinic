@@ -9,11 +9,11 @@ jobs:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
       - image: circleci/mysql:8.0.4
-          environment:
-            MYSQL_ROOT_PASSWORD: guru
-            MYSQL_DATABASE: sfg_dev_user
-            MYSQL_USER: sfg_dev_user
-            MYSQL_PASSWORD: guru
+        environment:
+          MYSQL_ROOT_PASSWORD: guru
+          MYSQL_DATABASE: sfg_dev_user
+          MYSQL_USER: sfg_dev_user
+          MYSQL_PASSWORD: guru
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
