@@ -43,9 +43,7 @@ jobs:
       - run: mvn integration-test cobertura:cobertura
 
       - store_test_results:
-          path:
-            -~/pet-clinic-data/target/surefire-reports
-            -~/pet-clinic-web/target/surefire-reports
+          path: pet-clinic-data/target/surefire-reports
 
       - run:
           name: Send to CodeCov
