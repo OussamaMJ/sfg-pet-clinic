@@ -66,6 +66,7 @@ class OwnerMapServiceTest {
     @Test
     void findByLastNameNotFound() {
         Owner owner = ownerMapService.findByLastName("foo");
+        System.out.println("test find by last name not found");
         assertNull(owner);
     }
 }
