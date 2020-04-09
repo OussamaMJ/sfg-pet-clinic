@@ -11,7 +11,7 @@ jobs:
       - image: circleci/mysql:8.0.4
         environment:
           MYSQL_ROOT_PASSWORD: MySQL@02101989
-          MYSQL_DATABASE: sfg_dev_user
+          MYSQL_DATABASE: sfg_dev
           MYSQL_USER: sfg_dev_user
           MYSQL_PASSWORD: guru
 
