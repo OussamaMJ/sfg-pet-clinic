@@ -63,7 +63,7 @@ jobs:
 #          path: pet-clinic-data/target/surefire-reports
       - store_artifacts:
           path:  target
-      #
+
       - run:
           name: Send to CodeCov
           command: bash <(curl -s https://codecov.io/bash)
