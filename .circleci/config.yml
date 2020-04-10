@@ -61,7 +61,9 @@ jobs:
 #
 #      - store_test_results:
 #          path: pet-clinic-data/target/surefire-reports
-#
-#      - run:
-#          name: Send to CodeCov
-#          command: bash <(curl -s https://codecov.io/bash)
+      - store_artifacts:
+          path:  target
+      #
+      - run:
+          name: Send to CodeCov
+          command: bash <(curl -s https://codecov.io/bash)
