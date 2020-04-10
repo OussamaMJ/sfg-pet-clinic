@@ -62,7 +62,7 @@ jobs:
 #      - store_test_results:
 #          path: pet-clinic-data/target/surefire-reports
       - store_artifacts:
-          path:  target
+          path:  pet-clinic-web/target
 
       - run:
           name: Send to CodeCov
