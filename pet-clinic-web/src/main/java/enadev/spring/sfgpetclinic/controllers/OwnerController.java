@@ -57,7 +57,7 @@ public class OwnerController {
     }
 
     @GetMapping("/{ownerId}")
-    public ModelAndView showOwner(@PathVariable("ownerId") Long ownerId){
+    public ModelAndView showOwner(@PathVariable("ownerId") String ownerId){
         ModelAndView mav = new ModelAndView("owners/ownerDetails");
         mav.addObject(ownerService.findById(ownerId));
         return mav;
@@ -80,13 +80,13 @@ public class OwnerController {
     }
 
     @GetMapping("/{ownerId}/edit")
-    public String initUpdateOwnerForm(@PathVariable("ownerId") Long ownerId, Model model){
+    public String initUpdateOwnerForm(@PathVariable("ownerId") String ownerId, Model model){
         model.addAttribute("owner",ownerService.findById(ownerId));
         return "owners/createOrUpdateOwnerForm";
     }
 
     @PostMapping("/{ownerId}/edit")
-    public String processUpdateOwnerForm(@Valid Owner owner, BindingResult result, @PathVariable("ownerId") Long ownerId){
+    public String processUpdateOwnerForm(@Valid Owner owner, BindingResult result, @PathVariable("ownerId") String ownerId){
         if(result.hasErrors()){
             return "owners/createOrUpdateOwnerForm";
         }else{

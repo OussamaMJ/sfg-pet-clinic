@@ -1,4 +1,4 @@
-package enadev.spring.sfgpetclinic.service.springdatajpa;
+package enadev.spring.sfgpetclinic.service.springdatamongo;
 
 import enadev.spring.sfgpetclinic.model.Owner;
 import enadev.spring.sfgpetclinic.repositories.OwnerRepository;
@@ -12,15 +12,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+
 @Service
-@Profile("springdatajpa")
-public class OwnerSDJpaService implements OwnerService {
+@Profile("springdatamongo")
+public class OwnerSDMService implements OwnerService {
     private final OwnerRepository ownerRepository;
     private final PetRepository petRepository;
     private final PetTypeRepository petTypeRepository;
 
-    public OwnerSDJpaService(OwnerRepository ownerRepository, PetRepository petRepository,
-                             PetTypeRepository petTypeRepository) {
+    public OwnerSDMService(OwnerRepository ownerRepository, PetRepository petRepository, PetTypeRepository petTypeRepository) {
         this.ownerRepository = ownerRepository;
         this.petRepository = petRepository;
         this.petTypeRepository = petTypeRepository;
@@ -44,7 +44,7 @@ public class OwnerSDJpaService implements OwnerService {
     }
 
     @Override
-    public Owner findById(Long aLong) {
+    public Owner findById(String aLong) {
         Optional<Owner> owner = ownerRepository.findById(aLong);
         return owner.orElse(null);
     }
@@ -60,7 +60,7 @@ public class OwnerSDJpaService implements OwnerService {
     }
 
     @Override
-    public void deleteById(Long aLong) {
+    public void deleteById(String aLong) {
         ownerRepository.deleteById(aLong);
     }
 }

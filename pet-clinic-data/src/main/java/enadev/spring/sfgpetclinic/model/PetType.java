@@ -1,24 +1,23 @@
 package enadev.spring.sfgpetclinic.model;
 
-import lombok.*;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.data.annotation.Id;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Entity
-@Table(name = "types")
-public class PetType extends BaseEntity{
-    @Column(name = "pet_name")
+
+public class PetType{
+    @Id
+    private String id;
     private String petName;
 
     @Builder
-    public PetType(Long id, String petName) {
-        super(id);
+    public PetType(String id, String petName) {
+        this.id = id;
         this.petName = petName;
     }
 

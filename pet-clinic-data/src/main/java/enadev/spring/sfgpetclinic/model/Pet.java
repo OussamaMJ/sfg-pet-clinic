@@ -3,40 +3,36 @@ package enadev.spring.sfgpetclinic.model;
 
 import lombok.*;
 
-import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "pets")
-public class Pet extends BaseEntity{
-    @Column(name = "name")
+
+public class Pet{
+
+    private String id;
     private String name;
-    @ManyToOne
-    @JoinColumn(name = "type_id")
-    private PetType petType;
-    @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private Owner owner;
-    @Column(name = "birth_day")
+    // @ManyToOne @JoinColumn(name = "type_id")
+    // private PetType petType;
+    // @ManyToOne @JoinColumn(name = "owner_id")
+    // private Owner owner;
+
     private LocalDate birthDay;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
-    private Set<Visit> visits = new HashSet<>();
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
+   // private Set<Visit> visits = new HashSet<>();
 
     @Builder
-    public Pet(Long id, String name, PetType petType, Owner owner, LocalDate birthDay, Set<Visit> visits) {
-        super(id);
+    public Pet(String id, String name, PetType petType, Owner owner, LocalDate birthDay, Set<Visit> visits) {
+        this.id = id;
         this.name = name;
-        this.petType = petType;
-        this.owner = owner;
+       // this.petType = petType;
+       // this.owner = owner;
         this.birthDay = birthDay;
-        if(visits != null) this.visits = visits;
+       // if(visits != null) this.visits = visits;
     }
 
 

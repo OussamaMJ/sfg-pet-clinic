@@ -1,4 +1,4 @@
-package enadev.spring.sfgpetclinic.service.springdatajpa;
+package enadev.spring.sfgpetclinic.service.springdatamongo;
 
 import enadev.spring.sfgpetclinic.model.PetType;
 import enadev.spring.sfgpetclinic.repositories.PetTypeRepository;
@@ -8,12 +8,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
+
 @Service
-@Profile("springdatajpa")
-public class PetTypeSDJpaService implements PetTypeService {
+@Profile("springdatamongo")
+public class PetTypeSDMService implements PetTypeService {
     private final PetTypeRepository petTypeRepository;
 
-    public PetTypeSDJpaService(PetTypeRepository petTypeRepository) {
+    public PetTypeSDMService(PetTypeRepository petTypeRepository) {
         this.petTypeRepository = petTypeRepository;
     }
 
@@ -25,7 +26,7 @@ public class PetTypeSDJpaService implements PetTypeService {
     }
 
     @Override
-    public PetType findById(Long aLong) {
+    public PetType findById(String aLong) {
         return petTypeRepository.findById(aLong).orElse(null);
     }
 
@@ -40,7 +41,7 @@ public class PetTypeSDJpaService implements PetTypeService {
     }
 
     @Override
-    public void deleteById(Long aLong) {
+    public void deleteById(String aLong) {
         petTypeRepository.deleteById(aLong);
     }
 }

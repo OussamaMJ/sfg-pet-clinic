@@ -1,4 +1,4 @@
-package enadev.spring.sfgpetclinic.service.springdatajpa;
+package enadev.spring.sfgpetclinic.service.springdatamongo;
 
 import enadev.spring.sfgpetclinic.model.Pet;
 import enadev.spring.sfgpetclinic.repositories.PetRepository;
@@ -10,11 +10,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-@Profile("springdatajpa")
-public class PetSDJpaService implements PetService {
+@Profile("springdatamongo")
+public class PetSDMService implements PetService {
     private final PetRepository petRepository;
 
-    public PetSDJpaService(PetRepository petRepository) {
+    public PetSDMService(PetRepository petRepository) {
         this.petRepository = petRepository;
     }
 
@@ -26,7 +26,7 @@ public class PetSDJpaService implements PetService {
     }
 
     @Override
-    public Pet findById(Long aLong) {
+    public Pet findById(String aLong) {
         return petRepository.findById(aLong).orElse(null);
     }
 
@@ -41,7 +41,7 @@ public class PetSDJpaService implements PetService {
     }
 
     @Override
-    public void deleteById(Long aLong) {
+    public void deleteById(String aLong) {
         petRepository.deleteById(aLong);
     }
 }

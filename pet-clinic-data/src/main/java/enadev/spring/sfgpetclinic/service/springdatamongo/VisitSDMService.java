@@ -1,4 +1,4 @@
-package enadev.spring.sfgpetclinic.service.springdatajpa;
+package enadev.spring.sfgpetclinic.service.springdatamongo;
 
 import enadev.spring.sfgpetclinic.model.Visit;
 import enadev.spring.sfgpetclinic.repositories.VisitRepository;
@@ -8,12 +8,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
+
 @Service
-@Profile("springdatajpa")
-public class VisitSDJpaService implements VisitService {
+@Profile("springdatamongo")
+public class VisitSDMService implements VisitService {
     private final VisitRepository visitRepository;
 
-    public VisitSDJpaService(VisitRepository visitRepository) {
+    public VisitSDMService(VisitRepository visitRepository) {
         this.visitRepository = visitRepository;
     }
 
@@ -25,7 +26,7 @@ public class VisitSDJpaService implements VisitService {
     }
 
     @Override
-    public Visit findById(Long aLong) {
+    public Visit findById(String aLong) {
         return visitRepository.findById(aLong).orElse(null);
     }
 
@@ -40,7 +41,7 @@ public class VisitSDJpaService implements VisitService {
     }
 
     @Override
-    public void deleteById(Long aLong) {
+    public void deleteById(String aLong) {
         visitRepository.deleteById(aLong);
     }
 }

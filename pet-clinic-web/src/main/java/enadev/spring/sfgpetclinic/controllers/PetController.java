@@ -38,7 +38,7 @@ public class PetController {
     }
 
     @ModelAttribute("owner")
-    public Owner findOwner(@PathVariable("ownerId") Long ownerId) {
+    public Owner findOwner(@PathVariable("ownerId") String ownerId) {
         return ownerService.findById(ownerId);
     }
 
@@ -50,18 +50,21 @@ public class PetController {
     @GetMapping("/pets/new")
     public String initCreationForm(Owner owner, Model model){
         Pet pet = new Pet();
-        owner.getPets().add(pet);
-        pet.setOwner(owner);
+   //     owner.getPets().add(pet);
+    //    pet.setOwner(owner);
         model.addAttribute("pet", pet);
         return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
     }
 
     @PostMapping("/pets/new")
     public String processCreationForm(Owner owner, @Valid Pet pet, BindingResult result, Model model) {
-        if (StringUtils.hasLength(pet.getName()) && pet.isNew() && owner.getPet(pet.getName(), true) != null){
+        if (StringUtils.hasLength(pet.getName())
+               // && pet.isNew()
+              //  && owner.getPet(pet.getName(), true) != null
+        ){
             result.rejectValue("name", "duplicate", "already exists");
         }
-        owner.getPets().add(pet);
+       // owner.getPets().add(pet);
         if (result.hasErrors()) {
             model.addAttribute("pet", pet);
             return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
@@ -72,7 +75,7 @@ public class PetController {
     }
 
     @GetMapping("/pets/{petId}/edit")
-    public String initUpdateForm(@PathVariable Long petId, Model model) {
+    public String initUpdateForm(@PathVariable String petId, Model model) {
         model.addAttribute("pet", petService.findById(petId));
         return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
     }
@@ -80,11 +83,11 @@ public class PetController {
     @PostMapping("/pets/{petId}/edit")
     public String processUpdateForm(@Valid Pet pet, BindingResult result, Owner owner, Model model) {
         if (result.hasErrors()) {
-            pet.setOwner(owner);
+           // pet.setOwner(owner);
             model.addAttribute("pet", pet);
             return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
         } else {
-            owner.getPets().add(pet);
+         //   owner.getPets().add(pet);
             petService.save(pet);
             return "redirect:/owners/" + owner.getId();
         }

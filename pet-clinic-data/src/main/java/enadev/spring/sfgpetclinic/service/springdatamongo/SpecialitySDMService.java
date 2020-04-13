@@ -1,4 +1,4 @@
-package enadev.spring.sfgpetclinic.service.springdatajpa;
+package enadev.spring.sfgpetclinic.service.springdatamongo;
 
 import enadev.spring.sfgpetclinic.model.Speciality;
 import enadev.spring.sfgpetclinic.repositories.SpecialityRepository;
@@ -8,12 +8,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
+
 @Service
-@Profile("springdatajpa")
-public class SpecialitySDJpaService implements SpecialityService {
+@Profile("springdatamongo")
+public class SpecialitySDMService implements SpecialityService {
     private final SpecialityRepository specialityRepository;
 
-    public SpecialitySDJpaService(SpecialityRepository specialityRepository) {
+    public SpecialitySDMService(SpecialityRepository specialityRepository) {
         this.specialityRepository = specialityRepository;
     }
 
@@ -25,7 +26,7 @@ public class SpecialitySDJpaService implements SpecialityService {
     }
 
     @Override
-    public Speciality findById(Long aLong) {
+    public Speciality findById(String aLong) {
         return specialityRepository.findById(aLong).orElse(null);
     }
 
@@ -40,7 +41,7 @@ public class SpecialitySDJpaService implements SpecialityService {
     }
 
     @Override
-    public void deleteById(Long aLong) {
+    public void deleteById(String aLong) {
         specialityRepository.deleteById(aLong);
     }
 }
