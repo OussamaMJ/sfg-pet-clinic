@@ -14,14 +14,16 @@ public class DataLoader implements CommandLineRunner {
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
     private final VisitService visitService;
+    private final PetService petService;
 
     public DataLoader(OwnerService ownerService, VetService vetService,
-                      PetTypeService petTypeService, SpecialityService specialityService, VisitService visitService) {
+                      PetTypeService petTypeService, SpecialityService specialityService, VisitService visitService, PetService petService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
         this.visitService = visitService;
+        this.petService = petService;
     }
 
     @Override
@@ -59,11 +61,18 @@ public class DataLoader implements CommandLineRunner {
         owner1.setTelephone("0614483486");
 
         Pet ousPet = new Pet();
-//        ousPet.setPetType(savedDogPetType);
-//        ousPet.setOwner(owner1);
+        ousPet.setPetType(savedDogPetType);
         ousPet.setBirthDay(LocalDate.now());
         ousPet.setName("Putchi");
-//        owner1.getPets().add(ousPet);
+
+        Visit visit1 = new Visit();
+        visit1.setDate(LocalDate.now());
+        visit1.setDescription("sneeezy kitty");
+
+        Visit savedVisit = visitService.save(visit1);
+        ousPet.getVisits().add(savedVisit);
+        Pet savedPet = petService.save(ousPet);
+        owner1.getPets().add(savedPet);
         ownerService.save(owner1);
 
         Owner owner2 = new Owner();
@@ -76,20 +85,12 @@ public class DataLoader implements CommandLineRunner {
 
         System.out.println("Loaded Owners");
 
-        Visit visit1 = new Visit();
-//        visit1.setPet(ousPet);
-        visit1.setDate(LocalDate.now());
-        visit1.setDescription("sneeezy kitty");
-
-        visitService.save(visit1);
-
         Vet vet1 = new Vet();
         vet1.setFirstName("Zakaria");
         vet1.setLastName("Abu");
         vet1.getSpecialities().add(savedDentistry);
-
         vetService.save(vet1);
 
-        System.out.println("Loaded Owners");
+        System.out.println("Loaded Vets");
     }
 }

@@ -32,8 +32,8 @@ public class OwnerSDMService implements OwnerService {
     }
 
     @Override
-    public List<Owner> findAllByLastNameLike(String anyString) {
-        return ownerRepository.findAllByLastNameLike(anyString);
+    public List<Owner> findAllByLastName(String anyString) {
+        return ownerRepository.findAllByLastName(anyString);
     }
 
     @Override

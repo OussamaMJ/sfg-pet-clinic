@@ -14,6 +14,9 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.beans.PropertyEditorSupport;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Controller
@@ -43,33 +46,42 @@ public class PetController {
     }
 
     @InitBinder("owner")
-    public void initOwnerBinder(WebDataBinder dataBinder) {
+    public void initBinder( WebDataBinder dataBinder )
+    {
         dataBinder.setDisallowedFields("id");
+
+        dataBinder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) throws IllegalArgumentException {
+                setValue(LocalDateTime.parse(text));
+                //LocalDateTime.parse( text, DateTimeFormatter.ISO_DATE_TIME );
+            }
+        });
     }
+
 
     @GetMapping("/pets/new")
     public String initCreationForm(Owner owner, Model model){
         Pet pet = new Pet();
-   //     owner.getPets().add(pet);
-    //    pet.setOwner(owner);
+        owner.getPets().add(pet);
         model.addAttribute("pet", pet);
         return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
     }
 
     @PostMapping("/pets/new")
     public String processCreationForm(Owner owner, @Valid Pet pet, BindingResult result, Model model) {
-        if (StringUtils.hasLength(pet.getName())
-               // && pet.isNew()
-              //  && owner.getPet(pet.getName(), true) != null
-        ){
+        if (StringUtils.hasLength(pet.getName()) && pet.isNew_()  && owner.getPet(pet.getName(), true) != null){
             result.rejectValue("name", "duplicate", "already exists");
         }
-       // owner.getPets().add(pet);
         if (result.hasErrors()) {
             model.addAttribute("pet", pet);
             return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
         } else {
+            //Pet petToSave = Pet.builder().name(pet.getName()).birthDay(pet.getBirthDay()).petType(pet.getPetType()).build();
+            pet.setId(null);
             petService.save(pet);
+            owner.getPets().add(pet);
+            ownerService.save(owner);
             return "redirect:/owners/" + owner.getId();
         }
     }
@@ -83,12 +95,16 @@ public class PetController {
     @PostMapping("/pets/{petId}/edit")
     public String processUpdateForm(@Valid Pet pet, BindingResult result, Owner owner, Model model) {
         if (result.hasErrors()) {
-           // pet.setOwner(owner);
+            System.out.println("Has binding errors ...");
             model.addAttribute("pet", pet);
             return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
         } else {
-         //   owner.getPets().add(pet);
-            petService.save(pet);
+            Pet petFromDB = petService.findById(pet.getId());
+            petFromDB.setName(pet.getName());
+            petFromDB.setBirthDay(pet.getBirthDay());
+            petFromDB.setPetType(pet.getPetType());
+            petService.save(petFromDB);
+
             return "redirect:/owners/" + owner.getId();
         }
     }

@@ -4,7 +4,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -24,21 +26,28 @@ public class Owner extends Person {
     private String city;
     private String telephone;
 
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
-    //private Set<Pet> pets = new HashSet<>();
+    private boolean new_;
 
-/*    public Pet getPet(String petName){
+    @DBRef
+    private Set<Pet> pets = new HashSet<>();
+
+    public Pet getPet(String petName){
         return getPet(petName,false);
-    }*/
-/*    public Pet getPet(String name, boolean b) {
+    }
+    public Pet getPet(String name, boolean b) {
         name = name.toLowerCase();
         for(Pet pet: pets){
-            if(!b || !pet.isNew()){
+            if(!b || !pet.isNew_()){
                 String compName = pet.getName();
                 compName = compName.toLowerCase();
                 if(compName.equals(name)) return pet;
             }
         }
         return null;
-    }*/
+    }
+
+    public boolean isNew_() {
+        if(this.getId() != null) return false;
+        else return true;
+    }
 }

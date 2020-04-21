@@ -43,9 +43,10 @@ public class OwnerController {
         if(owner.getLastName() == null){
             owner.setLastName("");
         }
-        List<Owner> listOwners = ownerService.findAllByLastNameLike("%"+owner.getLastName()+"%");
+        System.out.println("Owner's Last Name "+owner.getLastName());
+        List<Owner> listOwners = ownerService.findAllByLastName(owner.getLastName());
         if(listOwners.isEmpty()){
-            result.reject("lastName", new String[]{"notFound"}, "Not Found");
+            result.reject("lastName", new String[]{"notFound"}, "Not Found At All");
             return "owners/findOwners";
         }else if(listOwners.size() == 1){
             owner = listOwners.get(0);
@@ -90,9 +91,15 @@ public class OwnerController {
         if(result.hasErrors()){
             return "owners/createOrUpdateOwnerForm";
         }else{
-            owner.setId(ownerId);
-            Owner savedOwner  = ownerService.save(owner);
-            return "redirect:/owners/"+savedOwner.getId();
+            Owner ownerFromDB  = ownerService.findById(ownerId);
+            ownerFromDB.setTelephone(owner.getTelephone());
+            ownerFromDB.setCity(owner.getCity());
+            ownerFromDB.setLastName(owner.getLastName());
+            ownerFromDB.setFirstName(owner.getFirstName());
+            ownerFromDB.setAddress(owner.getAddress());
+
+            Owner ownerSavedToDB  = ownerService.save(ownerFromDB);
+            return "redirect:/owners/"+ownerFromDB.getId();
         }
     }
 

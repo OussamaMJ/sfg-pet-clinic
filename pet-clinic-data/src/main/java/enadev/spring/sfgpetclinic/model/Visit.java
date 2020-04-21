@@ -1,6 +1,7 @@
 package enadev.spring.sfgpetclinic.model;
 
 import lombok.*;
+import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
 
@@ -12,11 +13,8 @@ import java.time.LocalDate;
 @ToString
 
 public class Visit {
-
+    @Id
+    private String id;
     private LocalDate date;
     private String description;
-
-/*    @ManyToOne
-    @JoinColumn(name = "pet_id")
-    private Pet pet;*/
 }
