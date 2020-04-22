@@ -2,11 +2,12 @@ package enadev.spring.sfgpetclinic.bootstrap;
 
 import enadev.spring.sfgpetclinic.model.*;
 import enadev.spring.sfgpetclinic.service.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-
+@Slf4j
 @Component
 public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
@@ -15,6 +16,16 @@ public class DataLoader implements CommandLineRunner {
     private final SpecialityService specialityService;
     private final VisitService visitService;
     private final PetService petService;
+
+/*
+    @Autowired OwnerReactiveRepository ownerReactiveRepository;
+    @Autowired PetReactiveRepository petReactiveRepository;
+    @Autowired PetTypeReactiveRepository petTypeReactiveRepository;
+    @Autowired VisitReactiveRepository visitReactiveRepository;
+    @Autowired VetReactiveRepository vetReactiveRepository;
+    @Autowired SpecialityReactiveRepository specialityReactiveRepository;
+*/
+
 
     public DataLoader(OwnerService ownerService, VetService vetService,
                       PetTypeService petTypeService, SpecialityService specialityService, VisitService visitService, PetService petService) {
@@ -30,6 +41,15 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
         int count = petTypeService.findAll().size();
         if (count == 0) loadData();
+
+/*        log.error("Start Reactive ------------");
+        log.error(" Number of owners "+ownerReactiveRepository.count().block().toString());
+        log.error(" Number of pets "+petReactiveRepository.count().block().toString());
+        log.error(" Number of pet types "+petTypeReactiveRepository.count().block().toString());
+        log.error(" Number of visits "+visitReactiveRepository.count().block().toString());
+        log.error(" Number of vets "+vetReactiveRepository.count().block().toString());
+        log.error(" Number of specialities "+specialityReactiveRepository.count().block().toString());
+        log.error("End Reactive --------------");*/
     }
 
     private void loadData() {
