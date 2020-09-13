@@ -1,6 +1,8 @@
+properties([parameters([choice(choices: ['master', 'sfg-pet-clinic-mongo'], description: 'Select Branch To Build', name: 'branch')])])
 node{
   stage('SCM Ckeckout'){
-    git 'https://github.com/OussamaMJ/sfg-pet-clinic'
+    echo "Pulling From Branch ${params.branch}"
+    git url: 'https://github.com/OussamaMJ/sfg-pet-clinic', branch: "${params.branch}"
   }
   stage('Compile-package'){
     sh 'mvn package'
